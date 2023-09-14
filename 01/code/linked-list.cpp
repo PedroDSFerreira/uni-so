@@ -19,9 +19,9 @@ Node *append(Node *list, uint32_t nmec, char *name) {
   if (node == NULL) {
     exit(1);
   }
-
+  char *nameCopy = strdup(name);
   node->reg.nmec = nmec;
-  node->reg.name = name;
+  node->reg.name = nameCopy;
   node->next = NULL;
 
   if (list == NULL) {
@@ -37,8 +37,7 @@ Node *append(Node *list, uint32_t nmec, char *name) {
 
 void print(Node *list) {
   while (list != NULL) {
-    // TODO: name is not being printed
-    printf("%d %s\n", list->reg.nmec, list->reg.name);
+    printf("%d | %s\n", list->reg.nmec, list->reg.name);
     list = list->next;
   }
 }

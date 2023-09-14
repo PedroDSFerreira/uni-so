@@ -20,8 +20,7 @@ struct Node {
 Node *destroy(Node *list);
 Node *append(Node *list, uint32_t nmec, char *name);
 void print(Node *list);
-int exists(Node *list, uint32_t nmec); // returns 0 (false) if it does not
-                                       // exist, 1 (true) if exists
+int exists(Node *list, uint32_t nmec);
 Node *remove(Node *list, uint32_t nmec);
 const char *search(Node *list, uint32_t nmec);
 Node *sort_by_name(Node *list);
