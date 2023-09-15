@@ -64,7 +64,8 @@ Node *remove(Node *list, uint32_t nmec) {
       return NULL;
     }
   }
-  // BUG: Removing tail - seg. fault
+
+  // Check body
   Node *current = list;
   while (current->next != NULL) {
     Node *tmp = current->next;
@@ -78,6 +79,7 @@ Node *remove(Node *list, uint32_t nmec) {
       current = current->next;
     }
   }
+
   return list;
 }
 
