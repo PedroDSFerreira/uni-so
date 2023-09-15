@@ -51,7 +51,13 @@ void menuChoicePrint() { print(list); }
 
 /* ******************************************** */
 
-void menuChoiceRemove() {}
+void menuChoiceRemove() {
+  printf("Enter student nmec to remove: ");
+  int nmec;
+  scanf("%d", &nmec);
+  assert(nmec > 0);
+  list = remove(list, nmec);
+}
 
 /* ******************************************** */
 
