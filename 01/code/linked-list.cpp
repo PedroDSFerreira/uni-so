@@ -13,12 +13,10 @@ namespace base {
 Node *destroy(Node *list) { return NULL; }
 
 Node *append(Node *list, uint32_t nmec, char *name) {
-  Node *node = (Node *)malloc(sizeof(Node));
   assert(nmec > 0);
   assert(name != NULL);
-  if (node == NULL) {
-    exit(1);
-  }
+
+  Node *node = (Node *)malloc(sizeof(Node));
   char *nameCopy = strdup(name);
   node->reg.nmec = nmec;
   node->reg.name = nameCopy;
@@ -47,7 +45,6 @@ int exists(Node *list, uint32_t nmec) { return 0; }
 
 Node *remove(Node *list, uint32_t nmec) {
   assert(nmec > 0);
-  assert(list != NULL);
 
   if (list == NULL) {
     exit(1);
@@ -83,7 +80,17 @@ Node *remove(Node *list, uint32_t nmec) {
   return list;
 }
 
-const char *search(Node *list, uint32_t nmec) { return NULL; }
+const char *search(Node *list, uint32_t nmec) {
+  assert(nmec > 0);
+
+  while (list != NULL) {
+    if (list->reg.nmec == nmec) {
+      return list->reg.name;
+    }
+    list = list->next;
+  }
+  return NULL;
+}
 
 Node *sort_by_name(Node *list) { return NULL; }
 

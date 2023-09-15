@@ -61,7 +61,20 @@ void menuChoiceRemove() {
 
 /* ******************************************** */
 
-void menuChoiceSearch() {}
+void menuChoiceSearch() {
+  printf("Enter student nmec: ");
+  int nmec;
+  scanf("%d", &nmec);
+  assert(nmec > 0);
+
+  const char *name = search(list, nmec);
+
+  if (name != NULL) {
+    printf("Student name: %s\n", name);
+  } else {
+    printf("Student not found\n");
+  }
+}
 
 /* ******************************************** */
 
