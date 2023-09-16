@@ -51,11 +51,9 @@ Node *remove(Node *list, uint32_t nmec) {
   }
 
   // Check head
-  if (list->reg.nmec == nmec) {
+  while (list->reg.nmec == nmec) {
     if (list->next != NULL) {
-      Node *tmp = list->next;
-      free(list);
-      list = tmp;
+      list = joinNodes(NULL, list->next);
     } else {
       free(list);
       return NULL;
@@ -67,11 +65,7 @@ Node *remove(Node *list, uint32_t nmec) {
   while (current->next != NULL) {
     Node *tmp = current->next;
     if (tmp->reg.nmec == nmec) {
-      if (tmp->next != NULL) {
-        joinNodes(current, tmp->next);
-      } else {
-        joinNodes(current, NULL);
-      }
+      joinNodes(current, tmp->next);
     } else {
       current = current->next;
     }
@@ -92,15 +86,23 @@ const char *search(Node *list, uint32_t nmec) {
   return NULL;
 }
 
-Node *sort_by_name(Node *list) { return NULL; }
+Node *sort_by_name(Node *list) {
+  assert(list != NULL);
+  return NULL;
+}
 
 Node *sort_by_number(Node *list) { return NULL; }
 
-void joinNodes(Node *current, Node *target) {
-  assert(current != NULL);
-
-  Node *tmp = current->next;
-  current->next = target;
-  free(tmp);
+Node *joinNodes(Node *current, Node *target) {
+  Node *list;
+  if (current == NULL) {
+    list = target;
+  } else {
+    Node *tmp = current->next;
+    current->next = target;
+    free(tmp);
+    list = current;
+  }
+  return list;
 }
 } // namespace base

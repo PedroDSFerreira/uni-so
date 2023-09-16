@@ -78,11 +78,11 @@ void menuChoiceSearch() {
 
 /* ******************************************** */
 
-void menuChoiceSortByName() {}
+void menuChoiceSortByName() { list = sort_by_name(list); }
 
 /* ******************************************** */
 
-void menuChoiceSortByNumber() {}
+void menuChoiceSortByNumber() { list = sort_by_number(list); }
 
 /* ******************************************** */
 
