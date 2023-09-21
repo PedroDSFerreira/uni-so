@@ -8,14 +8,13 @@
 #include "process.h"
 
 int main(int argc, char *argv[]) {
-  for (int i = 1; i <= 10; i++) {
-    printf("%d\n", i);
-  }
-
   pid_t ret = pfork();
   if (ret == 0) {
     pexecl("./counter1_child", "./counter1_child", NULL);
   } else {
     pwait(NULL);
+    for (int i = 11; i <= 20; i++) {
+      printf("%d\n", i);
+    }
   }
 }

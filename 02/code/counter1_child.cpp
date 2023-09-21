@@ -7,7 +7,7 @@
 #include "process.h"
 
 int main(int argc, char *argv[]) {
-  for (int i = 11; i <= 20; i++) {
+  for (int i = 1; i <= 10; i++) {
     printf("%d\n", i);
   }
 }
