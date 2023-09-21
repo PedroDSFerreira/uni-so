@@ -6,8 +6,7 @@
 #include "delays.h"
 #include "process.h"
 
-int main(void)
-{
+int main(void) {
   printf("Before the fork:\n");
   printf("  PID = %d, PPID = %d\n", getpid(), getppid());
 
@@ -16,8 +15,9 @@ int main(void)
   printf("After the fork:\n");
   printf("  PID = %d, PPID = %d\n", getpid(), getppid());
   bwRandomDelay(0, 10000);
-  printf("  [ret = %d] Was I printed by the parent or by the child process? How can I know it?\n", ret); 
+  printf("  [ret = %d] Was I printed by the parent or by the child process? "
+         "How can I know it?\n",
+         ret);
 
   return EXIT_SUCCESS;
 }
-

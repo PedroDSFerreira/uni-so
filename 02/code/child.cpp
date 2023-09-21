@@ -6,11 +6,10 @@
 #include "delays.h"
 #include "process.h"
 
-int main(void)
-{
-    printf("I'm the child: PID = %d, PPID = %d\n", getpid(), getppid());
-    usleep(0);
-    printf("I'm the child: PID = %d, PPID = %d\n", getpid(), getppid());
+int main(void) {
+  printf("I'm the child: PID = %d, PPID = %d\n", getpid(), getppid());
+  usleep(100000);
+  printf("I'm the child: PID = %d, PPID = %d\n", getpid(), getppid());
 
-   return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
