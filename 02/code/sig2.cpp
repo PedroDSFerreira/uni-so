@@ -8,7 +8,8 @@
 #define NTIMES 50
 
 static void Interrupt(int signum) {
-  if (signum == SIGINT) {
+  printf("%d\n", signum);
+  if (signum == SIGINT || signum == SIGTERM) {
     printf("\nStay calm, I haven't reached %u yet!\n", NTIMES);
   } else {
     printf("A signal different from SIGINT was received\n");
@@ -23,6 +24,10 @@ int main(void) {
   sigemptyset(&sigact.sa_mask);
   sigact.sa_flags = 0;
   if (sigaction(SIGINT, &sigact, NULL) < 0) {
+    perror("Rotina de atendimento não instalada\n");
+    return EXIT_FAILURE;
+  }
+  if (sigaction(SIGTERM, &sigact, NULL) < 0) {
     perror("Rotina de atendimento não instalada\n");
     return EXIT_FAILURE;
   }
