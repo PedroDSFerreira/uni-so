@@ -1,3 +1,4 @@
+#include <signal.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +11,6 @@ int main(void) {
   printf("Input PID: ");
   int pid;
   scanf("%d", &pid);
-  pkill((pid_t)pid, 2);
+  pkill((pid_t)pid, SIGINT);
   return 0;
 }
