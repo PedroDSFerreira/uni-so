@@ -53,7 +53,8 @@ Node *remove(Node *list, uint32_t nmec) {
   // Check head
   while (list->reg.nmec == nmec) {
     if (list->next != NULL) {
-      list = joinNodes(NULL, list->next);
+      joinNodes(NULL, list->next);
+      list = list->next;
     } else {
       free(list);
       return NULL;
@@ -66,6 +67,7 @@ Node *remove(Node *list, uint32_t nmec) {
     Node *tmp = current->next;
     if (tmp->reg.nmec == nmec) {
       joinNodes(current, tmp->next);
+      free(tmp);
     } else {
       current = current->next;
     }
@@ -91,18 +93,44 @@ Node *sort_by_name(Node *list) {
   return NULL;
 }
 
-Node *sort_by_number(Node *list) { return NULL; }
+Node *sort_by_number(Node *list) {
+  assert(list != NULL);
 
-Node *joinNodes(Node *current, Node *target) {
-  Node *list;
-  if (current == NULL) {
-    list = target;
-  } else {
-    Node *tmp = current->next;
-    current->next = target;
-    free(tmp);
-    list = current;
+  Node *sorted = list;
+  Node *current = list;
+  while (current->next != NULL) {
+    Node *next = current->next;
+    printf("sorted: %d\nnext: %d\n\n\n", sorted->reg.nmec, next->reg.nmec);
+    // check head
+    if (next->reg.nmec < sorted->reg.nmec) {
+      // BUG:first element points to next,
+      // when joining the next as head, creates a loop
+      printf("here\n");
+
+      joinNodes(next, sorted);
+      sorted = next;
+      print(sorted);
+    } else {
+      // check body
+      Node *tmp = sorted;
+      while (tmp->next != NULL) {
+        if (next->reg.nmec < tmp->next->reg.nmec) {
+          joinNodes(next, tmp->next);
+          break;
+        }
+        tmp = tmp->next;
+      }
+    }
+    current = next;
   }
-  return list;
+  return sorted;
+}
+
+void joinNodes(Node *current, Node *target) {
+  if (current == NULL) {
+    current = target;
+  } else {
+    current->next = target;
+  }
 }
 } // namespace base

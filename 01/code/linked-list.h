@@ -25,7 +25,7 @@ Node *remove(Node *list, uint32_t nmec);
 const char *search(Node *list, uint32_t nmec);
 Node *sort_by_name(Node *list);
 Node *sort_by_number(Node *list);
-Node *joinNodes(Node *current, Node *target);
+void joinNodes(Node *current, Node *target);
 } // namespace base
 
 #endif /* __SO_IPC_ULL_ */
