@@ -9,7 +9,6 @@
 #include "process.h"
 
 int main(int argc, char *argv[]) {
-
   // creation:
   int shmid = pshmget(IPC_PRIVATE, sizeof(int), 0600 | IPC_CREAT | IPC_EXCL);
   // attach shm to pointer address:
