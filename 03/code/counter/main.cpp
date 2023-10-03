@@ -18,10 +18,10 @@ int main(int argc, char *argv[]) {
   if (pfork() == 0) {
     // child
     int max;
-    printf("Enter max [1:30]: ");
+    printf("Enter max [10:20]: ");
     scanf("%d", &max);
-    assert(max > 1);
-    assert(max <= 30);
+    assert(max > 10);
+    assert(max <= 20);
 
     while (*pcounter < max) {
       (*pcounter)++;
