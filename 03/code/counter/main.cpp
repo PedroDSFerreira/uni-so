@@ -20,8 +20,10 @@ int main(int argc, char *argv[]) {
     int max;
     printf("Enter max [10:20]: ");
     scanf("%d", &max);
-    assert(max > 10);
-    assert(max <= 20);
+
+    if (max < 10 || max > 20) {
+      exit(EXIT_FAILURE);
+    }
 
     while (*pcounter < max) {
       (*pcounter)++;
