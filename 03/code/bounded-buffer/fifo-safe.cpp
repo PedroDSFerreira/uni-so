@@ -36,13 +36,6 @@ void fifoInsert(FIFO *f, uint32_t id, uint32_t v1, uint32_t v2) {
   /* lock access to fifo */
   psem_down(f->sem, LOCKER);
 
-  // if fifo recieves an empty value, end the process
-  if (v1 == 0 && v2 == 0) {
-    psem_up(f->sem, LOCKER);
-    psem_up(f->sem, SLOTS);
-    psem_up(f->sem, ITEMS);
-    exit(0);
-  }
   /* make insertion */
   f->data[f->in].id = id;
   f->data[f->in].v1 = v1;
