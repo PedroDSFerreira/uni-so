@@ -70,7 +70,7 @@ void consumer(uint32_t id, FIFO *f) {
     fifoRetrieve(f, &pid, &v1, &v2);
 
     /* print it */
-    if (v1 == 0 && v2 == 0)
+    if (pid == 0 && v1 == 0 && v2 == 0)
       return;
     else if (v1 == v2)
       printf("\e[32;01mConsumer %u retrieve (%u,%u,%u) from the fifo\e[0m\n",
