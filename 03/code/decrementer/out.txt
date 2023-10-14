@@ -1,0 +1,13 @@
+Enter max [10:20]: 12
+Child 15501: 11
+Child 15502: 10
+Child 15501: 9
+Child 15502: 8
+Child 15501: 7
+Child 15502: 6
+Child 15501: 5
+Child 15502: 4
+Child 15501: 3
+Child 15502: 2
+Child 15501: 1
+
