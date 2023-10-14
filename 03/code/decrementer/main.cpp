@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
       while (true) {
         psem_down(semid, i);
         if (*pcounter <= 1) {
-          psem_up(semid, (*pcounter + 1) % 2);
+          psem_up(semid, (i + 1) % 2);
           exit(EXIT_SUCCESS);
         } else {
           (*pcounter)--;
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
           usleep(500000);
         }
 
-        psem_up(semid, (*pcounter) % 2);
+        psem_up(semid, (i + 1) % 2);
       }
     } else {
       // parent
