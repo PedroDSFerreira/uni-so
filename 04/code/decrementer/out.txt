@@ -1,0 +1,12 @@
+Enter value [10:20]: 10
+Child 702666432: 9
+Child 694273728: 8
+Child 702666432: 7
+Child 694273728: 6
+Child 702666432: 5
+Child 694273728: 4
+Child 702666432: 3
+Child 694273728: 2
+Child 702666432: 1
+Child 694273728 is finished
+
