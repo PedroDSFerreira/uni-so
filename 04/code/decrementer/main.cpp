@@ -4,11 +4,11 @@
 
 #include "thread.h"
 
-static int COUNTER;
+static int counter;
 static int THREADS = 2;
-static pthread_mutex_t MTX = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t IS_EVEN = PTHREAD_COND_INITIALIZER;
-pthread_cond_t IS_ODD = PTHREAD_COND_INITIALIZER;
+static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
+static pthread_cond_t is_even = PTHREAD_COND_INITIALIZER;
+static pthread_cond_t is_odd = PTHREAD_COND_INITIALIZER;
 
 struct threadArgs {
   int id;
@@ -21,44 +21,44 @@ void *thread_main(void *args) {
   int id = targs->id;
 
   while (true) {
-    mutex_lock(&MTX);
+    mutex_lock(&mtx);
 
     if (id % 2 == 0) {
-      while (COUNTER % 2 != 0) {
-        cond_wait(&IS_EVEN, &MTX);
+      while (counter % 2 != 0) {
+        cond_wait(&is_even, &mtx);
       }
     } else {
-      while (COUNTER % 2 == 0) {
-        cond_wait(&IS_ODD, &MTX);
+      while (counter % 2 == 0) {
+        cond_wait(&is_odd, &mtx);
       }
     }
 
-    COUNTER--;
+    counter--;
 
-    printf("Child %u: %d\n", (int)pthread_self(), COUNTER);
+    printf("Child %u: %d\n", (int)pthread_self(), counter);
     usleep(500000);
 
     if (id % 2 == 0) {
-      cond_broadcast(&IS_ODD);
+      cond_broadcast(&is_odd);
     } else {
-      cond_broadcast(&IS_EVEN);
+      cond_broadcast(&is_even);
     }
 
-    if (COUNTER == 2 || COUNTER == 1) {
-      mutex_unlock(&MTX);
+    if (counter == 2 || counter == 1) {
+      mutex_unlock(&mtx);
       break;
     }
 
-    mutex_unlock(&MTX);
+    mutex_unlock(&mtx);
   }
   return NULL;
 }
 
 int main(void) {
   printf("Enter value [10:20]: ");
-  scanf("%d", &COUNTER);
+  scanf("%d", &counter);
 
-  if (COUNTER < 10 || COUNTER > 20) {
+  if (counter < 10 || counter > 20) {
     printf("Invalid value\n");
     exit(EXIT_FAILURE);
   }
@@ -77,7 +77,7 @@ int main(void) {
     pthread_join(thr[i], NULL);
   }
 
-  mutex_destroy(&MTX);
-  cond_destroy(&IS_EVEN);
-  cond_destroy(&IS_ODD);
+  mutex_destroy(&mtx);
+  cond_destroy(&is_even);
+  cond_destroy(&is_odd);
 }
