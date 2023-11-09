@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <cstdlib>
 #include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -47,7 +48,7 @@ Node *remove(Node *list, uint32_t nmec) {
   assert(nmec > 0);
 
   if (list == NULL) {
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   // Check head
@@ -89,12 +90,16 @@ const char *search(Node *list, uint32_t nmec) {
 }
 
 Node *sort_by_name(Node *list) {
-  assert(list != NULL);
+  if (list == NULL) {
+    exit(EXIT_FAILURE);
+  }
   return NULL;
 }
 
 Node *sort_by_number(Node *list) {
-  assert(list != NULL);
+  if (list == NULL) {
+    exit(EXIT_FAILURE);
+  }
 
   Node *sorted = list;
   Node *current = list;
